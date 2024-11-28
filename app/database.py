@@ -27,3 +27,9 @@ class Words(Base):
 
 
 Base.metadata.create_all(engine)
+if not session_db.query(Words).all():
+    first_word = Words(
+        word="mundo"
+    )
+    session_db.add(first_word)
+    session_db.commit()

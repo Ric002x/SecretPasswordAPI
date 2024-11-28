@@ -3,11 +3,11 @@ import threading
 import time
 from datetime import datetime
 
-from database import Words, session_db
+from .database import Words, session_db
 
 
 def get_random_word():
-    with open("./dictionary.txt", 'r') as file:
+    with open("app/dictionary.txt", 'r') as file:
         words = file.read().split('\n')
         random_word = rd.choice(words)
         return random_word

@@ -1,14 +1,12 @@
 from collections import Counter
 
-import uvicorn
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from database import Words, session_db
-from schedule_words import start_schedule
+from .database import Words, session_db
 
-with open("./dictionary.txt", 'r') as file:
+with open("app/dictionary.txt", 'r') as file:
     ALL_WORDS = set(file.read().splitlines())
 
 
@@ -36,12 +34,9 @@ def get_today_word():
 @app.get('/validate/{word}')
 def validate_word(word: str):
     if word not in ALL_WORDS or len(word) != 5:
-        raise HTTPException(
-            status.HTTP_404_NOT_FOUND,
-            detail=f"The word {word.upper()} doesn't exist"
-        )
+        return {"validate": False}
     return JSONResponse(
-        {"message": f"the word {word.upper()} is valid"}
+        {"validate": True}
     )
 
 
@@ -84,8 +79,3 @@ def validate_word_guess(word: str):
             "validation": word_letters_validation,
         }
     )
-
-
-if __name__ == "__main__":
-    start_schedule()
-    uvicorn.run(app, host='0.0.0.0', port=8000)
