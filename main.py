@@ -22,37 +22,39 @@ app.add_middleware(
 )
 
 
-@ app.get('/today-word')
-def get_word():
+@app.get('/current-word')
+def get_today_word():
     last_word = session_db.query(Words).order_by(Words.id.desc()).first()
-    if last_word:
-        return JSONResponse({'word': last_word.word})
-    else:
+    if not last_word:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Couldn't find a word"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error getting today's word"
         )
+    return JSONResponse({"word": last_word.word})
 
 
-@ app.get("/verify-word/{word}")
-def verify_word(word: str):
+@app.get('/validate/{word}')
+def validate_word(word: str):
+    if word not in ALL_WORDS or len(word) != 5:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND,
+            detail=f"The word {word.upper()} doesn't exist"
+        )
+    return JSONResponse(
+        {"message": f"the word {word.upper()} is valid"}
+    )
+
+
+@app.get("/check-word/{word}")
+def validate_word_guess(word: str):
     last_word_object = session_db.query(
         Words).order_by(Words.id.desc()).first()
     if not last_word_object:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Couldn't find a word"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error getting today's word"
         )
-
     today_word = last_word_object.word
-
-    if word not in ALL_WORDS:
-        return JSONResponse(
-            {
-                "status": "invalid",
-                "message": f"the word {word} does not exist"
-            },
-        )
 
     if word == today_word:
         return JSONResponse({
