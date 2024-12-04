@@ -1,7 +1,6 @@
 from collections import Counter
 
-from fastapi import FastAPI, HTTPException, status
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse
 
 from .database import Words, session_db
@@ -9,19 +8,11 @@ from .database import Words, session_db
 with open("app/dictionary.txt", 'r') as file:
     ALL_WORDS = set(file.read().splitlines())
 
-
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5500",  # BackEnd
-                   "http://127.0.0.1:5500"],  # FrontEnd
-    allow_credentials=True,
-)
+router = APIRouter()
 
 
-@app.get('/current-word')
-def get_today_word():
+@router.get('/current-word')
+async def get_today_word():
     last_word = session_db.query(Words).order_by(Words.id.desc()).first()
     if not last_word:
         raise HTTPException(
@@ -31,8 +22,8 @@ def get_today_word():
     return JSONResponse({"word": last_word.word})
 
 
-@app.get('/validate/{word}')
-def validate_word(word: str):
+@router.get('/validate/{word}')
+async def validate_word(word: str):
     if word not in ALL_WORDS or len(word) != 5:
         return {"validate": False}
     return JSONResponse(
@@ -40,8 +31,8 @@ def validate_word(word: str):
     )
 
 
-@app.get("/check-word/{word}")
-def validate_word_guess(word: str):
+@router.get("/check-word/{word}")
+async def validate_word_guess(word: str):
     last_word_object = session_db.query(
         Words).order_by(Words.id.desc()).first()
     if not last_word_object:
