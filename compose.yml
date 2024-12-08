@@ -7,6 +7,9 @@ services:
     ports:
       - 8000:8000
     container_name: secret-password-backend
+    networks:
+      - app-network
+
 
   frontend:
     build:
@@ -17,3 +20,9 @@ services:
     container_name: secret-password-frontend
     depends_on:
       - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
