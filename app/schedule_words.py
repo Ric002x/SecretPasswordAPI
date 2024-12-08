@@ -2,7 +2,7 @@ import random as rd
 import threading
 import time
 from datetime import datetime
-
+from zoneinfo import ZoneInfo
 from .database import Words, session_db
 
 
@@ -15,8 +15,9 @@ def get_random_word():
 
 def schedule_job():
     while True:
-        now = datetime.now()
-        if now.minute == 0 and now.hour == 12:
+        timezone = ZoneInfo("America/Fortaleza")
+        now = datetime.now(timezone)
+        if now.hour == 12 and now.minute == 0:
             word = get_random_word()
             existing_word = session_db.query(
                 Words).filter_by(word=word).first()
