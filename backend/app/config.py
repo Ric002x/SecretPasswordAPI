@@ -10,7 +10,7 @@ def cors_middleware(api):
         CORSMiddleware,
         allow_origins=["http://localhost:5000",
                        "http://127.0.0.1:5000",
-                       "http://34.42.249.105"],
+                       "http://34.55.111.16"],
         allow_credentials=True,
     )
 
