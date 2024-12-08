@@ -165,4 +165,5 @@ cython_debug/
 
 # Personal add
 .vscode
-*.db
+backend/*.db
+deploy/

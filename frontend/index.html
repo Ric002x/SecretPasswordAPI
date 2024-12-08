@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Password</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <main>
+        <div class="game">
+            <div class="message_success" id="message"></div>
+            <div class="game_input">
+                <div class="row" , id="row1">
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                </div>
+
+                <div class="row" id="row2">
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                </div>
+
+                <div class="row" id="row3">
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                </div>
+
+                <div class="row" id="row4">
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                </div>
+
+                <div class="row" id="row5">
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                </div>
+
+                <div class="row" id="row6">
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                </div>
+                <div id="message_invalid">Palavra inválida...</div>
+            </div>
+
+
+            <div class="letters_used">
+                <div class="letters_container">
+                    <div class="letters_line">
+                        <div class="keyboard_button" letter="q">Q</div>
+                        <div class="keyboard_button" letter="w">W</div>
+                        <div class="keyboard_button" letter="e">E</div>
+                        <div class="keyboard_button" letter="r">R</div>
+                        <div class="keyboard_button" letter="t">T</div>
+                        <div class="keyboard_button" letter="y">Y</div>
+                        <div class="keyboard_button" letter="u">U</div>
+                        <div class="keyboard_button" letter="i">I</div>
+                        <div class="keyboard_button" letter="o">O</div>
+                        <div class="keyboard_button" letter="p">P</div>
+                        <div id="backspace_button"><i class="fa-solid fa-delete-left"></i></div>
+                    </div>
+
+                    <div class="letters_line">
+                        <div class="keyboard_button" letter="a">A</div>
+                        <div class="keyboard_button" letter="s">S</div>
+                        <div class="keyboard_button" letter="d">D</div>
+                        <div class="keyboard_button" letter="f">F</div>
+                        <div class="keyboard_button" letter="g">G</div>
+                        <div class="keyboard_button" letter="h">H</div>
+                        <div class="keyboard_button" letter="j">J</div>
+                        <div class="keyboard_button" letter="k">K</div>
+                        <div class="keyboard_button" letter="l">L</div>
+                    </div>
+
+                    <div class="letters_line">
+                        <div class="keyboard_button" letter="z">Z</div>
+                        <div class="keyboard_button" letter="x">X</div>
+                        <div class="keyboard_button" letter="c">C</div>
+                        <div class="keyboard_button" letter="v">V</div>
+                        <div class="keyboard_button" letter="b">B</div>
+                        <div class="keyboard_button" letter="n">N</div>
+                        <div class="keyboard_button" letter="m">M</div>
+                        <div id="enter_button">Enter</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
