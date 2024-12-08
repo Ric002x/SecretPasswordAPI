@@ -2,6 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app import create_api
+from app.database import Base, engine
 
 
 class TestBaseApplication():
@@ -10,6 +11,8 @@ class TestBaseApplication():
     def app(self):
         self.application = create_api()
         yield self.application
+
+        Base.metadata.drop_all(engine)
 
     @pytest.fixture
     def client(self, app):

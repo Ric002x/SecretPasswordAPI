@@ -1,11 +1,12 @@
-import os
-
 from sqlalchemy import String, create_engine
-from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
-database_url = os.getenv("DATABASE_URL", "sqlite:///./test")
-engine = create_engine(database_url, echo=True)
-session_db = Session(engine)
+from .config import settings
+
+engine = create_engine(
+    settings.DATABASE_URL, connect_args=settings.DATABASE_CONNECT_DICT
+)
+session_db = sessionmaker(autocommit=False, autoflush=False, bind=engine)()
 
 
 class Base(DeclarativeBase):
