@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["python", "-m", "http.server", "5000"]
+CMD ["python", "-m", "http.server", "5000", "--bind", "0.0.0.0"]
