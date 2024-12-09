@@ -11,7 +11,7 @@ with open("app/dictionary.txt", 'r') as file:
 router = APIRouter()
 
 
-@router.get('/current-word')
+@router.get('/api/current-word')
 async def get_today_word():
     last_word = session_db.query(Words).order_by(Words.id.desc()).first()
     if not last_word:
@@ -22,7 +22,7 @@ async def get_today_word():
     return JSONResponse({"word": last_word.word})
 
 
-@router.get('/validate/{word}')
+@router.get('/api/validate/{word}')
 async def validate_word(word: str):
     if word not in ALL_WORDS or len(word) != 5:
         return {"validate": False}
@@ -31,7 +31,7 @@ async def validate_word(word: str):
     )
 
 
-@router.get("/check-word/{word}")
+@router.get("/api/check-word/{word}")
 async def validate_word_guess(word: str):
     last_word_object = session_db.query(
         Words).order_by(Words.id.desc()).first()

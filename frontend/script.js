@@ -1,4 +1,4 @@
-const backend = "http://34.55.111.16/api"
+const backend = "/api"
 
 async function getTodayWord() {
     try {
