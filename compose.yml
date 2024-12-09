@@ -5,7 +5,7 @@ services:
       context: ./backend
       dockerfile: ./Dockerfile
     ports:
-      - 8080:8080
+      - 80:8000
     container_name: secret-password-backend
     networks:
       - app-network
@@ -20,9 +20,3 @@ services:
     container_name: secret-password-frontend
     depends_on:
       - backend
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge

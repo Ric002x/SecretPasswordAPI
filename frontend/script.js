@@ -1,6 +1,8 @@
+const backend = "http://34.55.111.16/api"
+
 async function getTodayWord() {
     try {
-        const response = await fetch('http://34.55.111.16:8080/current-word');
+        const response = await fetch(`${backend}/current-word`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         };
@@ -13,7 +15,7 @@ async function getTodayWord() {
 
 async function validateWord(playerWord) {
     try {
-        const response = await fetch(`http://34.55.111.16:8080/validate/${playerWord}`)
+        const response = await fetch(`${backend}/validate/${playerWord}`)
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         };
@@ -27,7 +29,7 @@ async function validateWord(playerWord) {
 
 async function checkWords(playerWord) {
     try {
-        const response = await fetch(`http://34.55.111.16:8080/check-word/${playerWord}`);
+        const response = await fetch(`${backend}/check-word/${playerWord}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         };

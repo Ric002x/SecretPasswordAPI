@@ -7,6 +7,6 @@ from .routers import router
 def create_api():
     settings = get_settings()
     api = FastAPI(debug=settings.DEBUG)
-    api.include_router(router)
+    api.include_router(router, prefix="api")
     cors_middleware(api)
     return api
